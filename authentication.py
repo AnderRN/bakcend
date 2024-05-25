@@ -11,7 +11,7 @@ app = FastAPI()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # JWT Config
-SECRET_KEY = ""
+SECRET_KEY = "3-d-3fvq86)5^@t_^xu#6^t=pboxq+-ajr5)7#7&&o(f08vsph"
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 

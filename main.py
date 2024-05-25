@@ -10,21 +10,21 @@ class Usuario(BaseModel):
 app = FastAPI()
 db = Database()
 
-# Esto es para crear un usuario
+# crear un usuario
 @app.post("/usuarios/")
 async def crear_usuario(usuario: Usuario):
     query = "INSERT INTO usuarios (nombre, email) VALUES (%s, %s)"
     db.execute_query(query, (usuario.nombre, usuario.email))
     return {"mensaje": "Usuario creado correctamente"}
 
-# Esto es para obtener todos los usuarios
+# obtener todos los usuarios
 @app.get("/usuarios/")
 async def obtener_usuarios():
     query = "SELECT nombre, email FROM usuarios"
     usuarios = db.fetch_all(query)
     return usuarios
 
-# Esto es para obtener un usuario por su ID
+# obtener un usuario por su ID
 @app.get("/usuarios/{usuario_id}")
 async def obtener_usuario(usuario_id: int):
     query = "SELECT nombre, email FROM usuarios WHERE id = %s"
@@ -34,14 +34,14 @@ async def obtener_usuario(usuario_id: int):
     else:
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
 
-# Esto es para actualizar un usuario
+# actualizar un usuario
 @app.put("/usuarios/{usuario_id}")
 async def actualizar_usuario(usuario_id: int, usuario: Usuario):
     query = "UPDATE usuarios SET nombre = %s, email = %s WHERE id = %s"
     db.execute_query(query, (usuario.nombre, usuario.email, usuario_id))
     return {"mensaje": "Usuario actualizado correctamente"}
 
-# Esto es para eliminar un usuario
+# eliminar un usuario
 @app.delete("/usuarios/{usuario_id}")
 async def eliminar_usuario(usuario_id: int):
     query = "DELETE FROM usuarios WHERE id = %s"
